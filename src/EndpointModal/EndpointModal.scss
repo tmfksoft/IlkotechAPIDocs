@@ -1,3 +1,5 @@
+@import url('https://highlightjs.org/static/demo/styles/androidstudio.css');
+
 .modalBackground {
     position:fixed;
     left:0;
@@ -18,7 +20,10 @@
         
         border:solid 1px #1E1E1E;
 
-        width:60vw;
+        width:80vw;
+        height:80vh;
+        display:flex;
+        flex-direction:column;
 
         .modalHeader {
             
@@ -55,15 +60,83 @@
             }
         }
         .modalContent {
-            padding:20px;
+            padding:10px;
             display:flex;
             background:black;
+            flex:1;
 
             .endpointParams {
                 flex:1;
+                margin-right:2.5px;
+
+                .paramName {
+                    display:inline-block;
+                    padding:5px 10px;
+                    &__active {
+                        background:#2C2F31;
+                    }
+                    &:hover {
+                        cursor:pointer;
+                        background:#2C2F31;
+                    }
+                }
+
+                .content {
+                    border-top:solid 1px red;
+                    background: #2C2F31;
+                    display:none;
+
+                    &__active {
+                        display:block;
+                    }
+                    
+                    table {
+                        width:100%;
+                        tr {
+                            td {
+                                padding:10px;
+
+                                &.type {
+                                    text-align:right;
+                                }
+                                &.name {
+                                    text-align:center;
+                                }
+                                &.required {
+                                    &::after {
+                                        content:'*';
+                                        color:red;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
             .endpointResponses {
                 flex:1;
+                margin-left:2.5px;
+                .responseCode {
+                    display:inline-block;
+                    padding:5px 10px;
+                    &__active {
+                        background:#2C2F31;
+                    }
+                    &:hover {
+                        cursor:pointer;
+                        background:#2C2F31;
+                    }
+                }
+                .responseBody {
+                    border-top:solid 1px red;
+                    background: #181818;
+                    pre { margin: 0; }
+                    display:none;
+
+                    &__active {
+                        display:block;
+                    }
+                }
             }
         }
     }

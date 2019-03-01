@@ -84,7 +84,7 @@ class Article extends Component<IArticleProps, IArticleState> {
 
 					{this.state.endpoints.map( (endpoint, ind) => {
 						return (
-							<>
+							<div key={ind}>
 								<EndpointModal closeCb={this.closeEndpoint} show={(this.state.focusedEndpoint === ind ? true : false)} endpoint={endpoint}></EndpointModal>
 								<div key={ind} className="endpoint">
 									<div className="endpointPath" onClick={this.openEndpoint.bind(this,ind)}>
@@ -93,7 +93,7 @@ class Article extends Component<IArticleProps, IArticleState> {
 									</div>
 									<div className="endpointDescription" dangerouslySetInnerHTML={{ __html: convertor.makeHtml(endpoint.description) }} ></div>
 								</div>
-							</>
+							</div>
 						);
 					})}
                 </header>
