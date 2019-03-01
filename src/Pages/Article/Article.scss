@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+h1 {
+    margin:0;
+}
+a {
+    color:#FF3E3E;
+    text-decoration:none;
+}
+.endpoint {
+    border-left:solid 2px red;
+    background:white;
+    margin-bottom:20px;
+    .endpointPath {
+        color:white;
+        background:black;
+        padding:10px;
+        font-size:14pt;
+        &:hover {
+            background:#111;
+            cursor:pointer;
+        }
+        .endpointMethod {
+            padding:5px;
+            background:white;
+            color:#111;
+            display:inline-block;
+            margin-right:10px;
+            font-size:12pt;
+            padding-left:10px;
+            padding-right:10px;
+        }
+        .https {
+            display:inline-block;
+            background:white;
+            border-radius:100%;
+            margin-right:10px;
+            padding:5px;
+        }
+    }
+    .endpointDescription {
+        padding:20px;
+    }
+}

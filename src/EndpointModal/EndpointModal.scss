@@ -1,0 +1,70 @@
+.modalBackground {
+    position:fixed;
+    left:0;
+    top:0;
+    width:100vw;
+    height:100vh;
+    background:rgba(0, 0, 0, .5);
+    .modal {
+        position:fixed;
+        right:50%;
+        bottom:50%;
+        transform:translate(50%, 50%);
+    
+        background:#111;
+        color:white;
+
+        box-shadow:3px 3px 5px rgba(0, 0, 0, .25);
+        
+        border:solid 1px #1E1E1E;
+
+        width:60vw;
+
+        .modalHeader {
+            
+            padding:10px;
+            border-bottom:solid 2px red;
+            display:flex;
+
+            .endpointMethod {
+                color: #111;
+                background: #fff;
+                display: inline-block;
+                font-weight: 700;
+                font-size: 13px;
+                margin-right: 5px;
+                padding: 5px 10px;
+                border-bottom: solid 1px red;
+            }
+            .endpointSecure {
+
+            }
+            .endpointPath {
+                color:gray;
+                flex:1;
+                padding:5px;
+            }
+
+            .modalClose {
+                padding:5px;
+                color:gray;
+                &:hover {
+                    cursor:pointer;
+                    color:white;
+                }
+            }
+        }
+        .modalContent {
+            padding:20px;
+            display:flex;
+            background:black;
+
+            .endpointParams {
+                flex:1;
+            }
+            .endpointResponses {
+                flex:1;
+            }
+        }
+    }
+}

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import '../../App.scss';
+import './Article.scss';
+import Showdown from 'showdown';
+import MaterialIcon from '@material/react-material-icon';
+import EndpointModal from '../../EndpointModal/EndpointModal';
 
 export interface IArticleProps {
 	categories: any[],
@@ -12,9 +14,9 @@ export interface IArticleState {
     title: string,
     description: string,
     slug: string,
-    endpoints: any[],
+	endpoints: any[],
+	focusedEndpoint: number,
 }
-
 class Article extends Component<IArticleProps, IArticleState> {
 
     constructor( props: IArticleProps) {
@@ -25,6 +27,7 @@ class Article extends Component<IArticleProps, IArticleState> {
 			description: '',
 			slug: '',
 			endpoints: [],
+			focusedEndpoint: -1,
 		};
     }
     
@@ -56,19 +59,49 @@ class Article extends Component<IArticleProps, IArticleState> {
             }
 
         }
-    }
+	}
+	
+	closeEndpoint = () => {
+		this.setState({
+			focusedEndpoint: -1
+		});
+	}
+	openEndpoint(endpointId: number) {
+		this.setState({
+			focusedEndpoint: endpointId
+		});
+		return false;
+	}
 
     render() {
         if (this.state.ready === true) {
+			
+			const convertor = new Showdown.Converter();
             return (
                 <header className="App-header">
-                    {this.state.title}
+					<h1>{this.state.title}</h1>
+					<div dangerouslySetInnerHTML={{ __html: convertor.makeHtml(this.state.description) }}></div>
+
+					{this.state.endpoints.map( (endpoint, ind) => {
+						return (
+							<>
+								<EndpointModal closeCb={this.closeEndpoint} show={(this.state.focusedEndpoint === ind ? true : false)} endpoint={endpoint}></EndpointModal>
+								<div key={ind} className="endpoint">
+									<div className="endpointPath" onClick={this.openEndpoint.bind(this,ind)}>
+										<div className="endpointMethod">{endpoint.method}</div>
+										{endpoint.url}
+									</div>
+									<div className="endpointDescription" dangerouslySetInnerHTML={{ __html: convertor.makeHtml(endpoint.description) }} ></div>
+								</div>
+							</>
+						);
+					})}
                 </header>
             );
         } else {
             return (
                 <header className="App-header">
-                    Let me just get that for you...
+                    Just searching for that... please wait!
                 </header>
             );
         }

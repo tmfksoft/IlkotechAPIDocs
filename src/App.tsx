@@ -51,7 +51,7 @@ class App extends Component<{}, { categories: any[] }> {
 				return <div key={c.slug} className="category">
 					<div className="categoryTitle">{c.title}</div>
 					{c.sections.map( (s: any) => {
-						return <NavLink exact key={s.slug} to={`/${c.slug}/${s.slug}`} className="section">{s.title}</NavLink>;
+						return <NavLink exact key={s.slug} to={`/${c.slug}/${s.slug}`} className="section" activeClassName="section__active">{s.title}</NavLink>;
 					})}
 				</div>;
 			})}
