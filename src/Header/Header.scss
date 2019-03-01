@@ -1,0 +1,19 @@
+.header {
+    text-align:left;
+    background:#111;
+    color:white;
+    .headerLogo {
+        padding:10px;
+        text-align:center;
+        img {
+            max-width:200px;
+        }
+    }
+    .banner {
+        background-color:#FF3E3E;
+        text-align:center;
+        font-size:18pt;
+        padding:10px;
+        font-weight:200;
+    }
+}
