@@ -8,14 +8,28 @@ import Article from './Pages/Article/Article';
 
 import Request from 'request-promise';
 import { NavLink } from 'react-router-dom';
+import MaterialIcon from '@material/react-material-icon';
+
+import {
+	BrowserView,
+	MobileView,
+	isBrowser,
+	isMobile
+  } from "react-device-detect";
 
 import { Switch, Route} from 'react-router-dom';
 
-class App extends Component<{}, { categories: any[] }> {
+export interface IAppState {
+	categories: any[],
+	showSidebar: boolean,
+}
+
+class App extends Component<{}, IAppState> {
 	constructor(props: {}) {
 		super(props);
 		this.state = {
 			categories: [],
+			showSidebar: !isMobile,
 		};
 	}
 
@@ -46,26 +60,40 @@ class App extends Component<{}, { categories: any[] }> {
 	}
 
 	getSidebar = () => {
-		return <div className="sidebarContent">
-			{this.state.categories.map( c => {
-				return <div key={c.slug} className="category">
-					<div className="categoryTitle">{c.title}</div>
-					{c.sections.map( (s: any) => {
-						return <NavLink exact key={s.slug} to={`/${c.slug}/${s.slug}`} className="section" activeClassName="section__active">{s.title}</NavLink>;
+		if (!this.state.showSidebar) return <></>;
+		return (
+			<div className="sidebar">
+				<Header></Header>
+				<div className="sidebarContent">
+					{this.state.categories.map( c => {
+						return <div key={c.slug} className="category">
+							<div className="categoryTitle">{c.title}</div>
+							{c.sections.map( (s: any) => {
+								return <NavLink exact key={s.slug} to={`/${c.slug}/${s.slug}`} className="section" activeClassName="section__active">{s.title}</NavLink>;
+							})}
+						</div>;
 					})}
-				</div>;
-			})}
-		</div>;
+				</div>
+				<Footer></Footer>
+			</div>
+		);
+	}
+
+	toggleSidebar = ()=>{
+		this.setState({
+			showSidebar: !this.state.showSidebar,
+		});
 	}
 
 	render() {
 		return (
 			<div className="App">
-				<div className="sidebar">
-					<Header></Header>
-					{this.getSidebar()}
-					<Footer></Footer>
-				</div>
+				{this.getSidebar()}
+				{isMobile &&
+					<div className="sidebarToggle">
+						<MaterialIcon icon="menu" onClick={this.toggleSidebar} className="toggleButton"></MaterialIcon>
+					</div>
+				}
 				<div className="article">
 					<Switch>
 						<Route exact={true} path="/" render={this.getDefaultArticle} />

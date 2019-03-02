@@ -60,3 +60,15 @@
 		}
 	}
 }
+.sidebarToggle {
+	background-color:#1E1E1E;
+	color:white;
+	.toggleButton {
+		padding:10px;
+		display:block;
+		&:hover {
+			cursor:pointer;
+			background-color:#393939;
+		}
+	}
+}
